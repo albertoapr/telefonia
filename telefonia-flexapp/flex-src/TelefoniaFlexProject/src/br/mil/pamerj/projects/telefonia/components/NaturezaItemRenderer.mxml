@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:GridItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					xmlns:mx="library://ns.adobe.com/flex/mx" clipAndEnableScrolling="true">
+	<fx:Script>
+		<![CDATA[
+			override public function prepare(hasBeenRecycled:Boolean):void {
+				//lblData.text = data[column.dataField]
+			}
+			protected function naturezaRadioChangeHandler(event:Event):void
+			{
+				data.natureza = naturezaRadio.selectedValue as String
+				this.dispatchEvent(new Event("selectionChanged",true));
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<s:RadioButtonGroup id="naturezaRadio" change="naturezaRadioChangeHandler(event)"
+							selectedValue="{data.natureza}" />
+	</fx:Declarations>
+	<s:HGroup left="10" right="10" verticalAlign="middle" horizontalAlign="center">
+		<s:RadioButton label="Particular" groupName="naturezaRadio" value="PARTICULAR"/>
+		<s:RadioButton label="Serviço" groupName="naturezaRadio" value="SERVICO"  />
+	</s:HGroup>
+	
+		
+	
+</s:GridItemRenderer>

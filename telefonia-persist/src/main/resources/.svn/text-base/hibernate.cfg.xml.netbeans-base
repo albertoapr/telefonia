@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory name="">
+    <!--
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/telefonia_development</property>
+    -->
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://10.52.152.2:5432/telefonia_production</property>
+    <property name="hibernate.connection.username">postgres</property>
+    <property name="hibernate.connection.password">tremplate0912</property>
+    <property name="hbm2ddl.auto">update</property>
+    <mapping resource="Ligacao.hbm.xml"/>
+    <mapping resource="TipoLigacao.hbm.xml"/>
+    <mapping resource="Ramal.hbm.xml"/>
+    <mapping resource="Fatura.hbm.xml"/>
+    <mapping resource="Faturamento.hbm.xml"/>
+    <mapping resource="AdminUser.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

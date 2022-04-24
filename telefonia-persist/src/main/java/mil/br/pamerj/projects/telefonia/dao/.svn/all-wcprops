@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/55/trunk/telefonia-persist/src/main/java/mil/br/pamerj/projects/telefonia/dao
+END
+ConfigDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/8/trunk/telefonia-persist/src/main/java/mil/br/pamerj/projects/telefonia/dao/ConfigDAO.java
+END
+FaturamentoDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/!svn/ver/30/trunk/telefonia-persist/src/main/java/mil/br/pamerj/projects/telefonia/dao/FaturamentoDAO.java
+END
+TipoLigacaoDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/8/trunk/telefonia-persist/src/main/java/mil/br/pamerj/projects/telefonia/dao/TipoLigacaoDAO.java
+END
+PessoaDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/48/trunk/telefonia-persist/src/main/java/mil/br/pamerj/projects/telefonia/dao/PessoaDAO.java
+END
+HibernateLigacaoDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/57/trunk/telefonia-persist/src/main/java/mil/br/pamerj/projects/telefonia/dao/HibernateLigacaoDAO.java
+END
+HibernateDAOFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/24/trunk/telefonia-persist/src/main/java/mil/br/pamerj/projects/telefonia/dao/HibernateDAOFactory.java
+END
+HibernateAdminUserDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/47/trunk/telefonia-persist/src/main/java/mil/br/pamerj/projects/telefonia/dao/HibernateAdminUserDAO.java
+END
+RamalDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/55/trunk/telefonia-persist/src/main/java/mil/br/pamerj/projects/telefonia/dao/RamalDAO.java
+END
+FaturaDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/55/trunk/telefonia-persist/src/main/java/mil/br/pamerj/projects/telefonia/dao/FaturaDAO.java
+END
+SOAPPessoaDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/48/trunk/telefonia-persist/src/main/java/mil/br/pamerj/projects/telefonia/dao/SOAPPessoaDAO.java
+END
+HibernateTipoLigacaoDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/!svn/ver/15/trunk/telefonia-persist/src/main/java/mil/br/pamerj/projects/telefonia/dao/HibernateTipoLigacaoDAO.java
+END
+HibernateFaturamentoDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/!svn/ver/43/trunk/telefonia-persist/src/main/java/mil/br/pamerj/projects/telefonia/dao/HibernateFaturamentoDAO.java
+END
+HibernateRamalDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/55/trunk/telefonia-persist/src/main/java/mil/br/pamerj/projects/telefonia/dao/HibernateRamalDAO.java
+END
+AdminUserDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/47/trunk/telefonia-persist/src/main/java/mil/br/pamerj/projects/telefonia/dao/AdminUserDAO.java
+END
+LigacaoDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/55/trunk/telefonia-persist/src/main/java/mil/br/pamerj/projects/telefonia/dao/LigacaoDAO.java
+END
+DAOFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/24/trunk/telefonia-persist/src/main/java/mil/br/pamerj/projects/telefonia/dao/DAOFactory.java
+END
+HibernateFaturaDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/55/trunk/telefonia-persist/src/main/java/mil/br/pamerj/projects/telefonia/dao/HibernateFaturaDAO.java
+END

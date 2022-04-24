@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/46/trunk/telefonia-model/src/main/java/mil/br/pamerj/projects/telefonia/dto
+END
+PessoaDTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/1/trunk/telefonia-model/src/main/java/mil/br/pamerj/projects/telefonia/dto/PessoaDTO.java
+END
+TipoLigacaoDTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/1/trunk/telefonia-model/src/main/java/mil/br/pamerj/projects/telefonia/dto/TipoLigacaoDTO.java
+END
+RamalDTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/29/trunk/telefonia-model/src/main/java/mil/br/pamerj/projects/telefonia/dto/RamalDTO.java
+END
+LigacaoDTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/46/trunk/telefonia-model/src/main/java/mil/br/pamerj/projects/telefonia/dto/LigacaoDTO.java
+END
+ItemFaturaDTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/46/trunk/telefonia-model/src/main/java/mil/br/pamerj/projects/telefonia/dto/ItemFaturaDTO.java
+END
+FaturaDTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/54/trunk/telefonia-model/src/main/java/mil/br/pamerj/projects/telefonia/dto/FaturaDTO.java
+END
+ConfigDTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/1/trunk/telefonia-model/src/main/java/mil/br/pamerj/projects/telefonia/dto/ConfigDTO.java
+END
+FaturamentoDTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/46/trunk/telefonia-model/src/main/java/mil/br/pamerj/projects/telefonia/dto/FaturamentoDTO.java
+END
+AdminUserDTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/1/trunk/telefonia-model/src/main/java/mil/br/pamerj/projects/telefonia/dto/AdminUserDTO.java
+END

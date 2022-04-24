@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/47/trunk/telefonia-flexapp/flex-src/TelefoniaFlexProject/src/br/mil/pamerj/projects/telefonia/services
+END
+RamalService.as
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/!svn/ver/53/trunk/telefonia-flexapp/flex-src/TelefoniaFlexProject/src/br/mil/pamerj/projects/telefonia/services/RamalService.as
+END
+UserService.as
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/!svn/ver/50/trunk/telefonia-flexapp/flex-src/TelefoniaFlexProject/src/br/mil/pamerj/projects/telefonia/services/UserService.as
+END
+LigacaoService.as
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/!svn/ver/50/trunk/telefonia-flexapp/flex-src/TelefoniaFlexProject/src/br/mil/pamerj/projects/telefonia/services/LigacaoService.as
+END
+RelatorioService.as
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/!svn/ver/53/trunk/telefonia-flexapp/flex-src/TelefoniaFlexProject/src/br/mil/pamerj/projects/telefonia/services/RelatorioService.as
+END
+FaturaService.as
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/!svn/ver/53/trunk/telefonia-flexapp/flex-src/TelefoniaFlexProject/src/br/mil/pamerj/projects/telefonia/services/FaturaService.as
+END
+FaturamentoService.as
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/!svn/ver/50/trunk/telefonia-flexapp/flex-src/TelefoniaFlexProject/src/br/mil/pamerj/projects/telefonia/services/FaturamentoService.as
+END

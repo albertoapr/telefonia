@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/55/trunk/telefonia-persist/src/main/resources
+END
+hibernate.cfg.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/50/trunk/telefonia-persist/src/main/resources/hibernate.cfg.xml
+END
+TipoLigacao.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/50/trunk/telefonia-persist/src/main/resources/TipoLigacao.hbm.xml
+END
+Faturamento.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/50/trunk/telefonia-persist/src/main/resources/Faturamento.hbm.xml
+END
+Ramal.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/50/trunk/telefonia-persist/src/main/resources/Ramal.hbm.xml
+END
+spring-context.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/48/trunk/telefonia-persist/src/main/resources/spring-context.xml
+END
+Ligacao.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/50/trunk/telefonia-persist/src/main/resources/Ligacao.hbm.xml
+END
+AdminUser.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/50/trunk/telefonia-persist/src/main/resources/AdminUser.hbm.xml
+END
+Fatura.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/55/trunk/telefonia-persist/src/main/resources/Fatura.hbm.xml
+END

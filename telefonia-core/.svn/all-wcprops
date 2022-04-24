@@ -1,0 +1,39 @@
+K 26
+svn:wc:ra_dav:activity-url
+V 14
+/svn/!svn/act/
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/56/trunk/telefonia-core
+END
+Teste
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/50/trunk/telefonia-core/Teste
+END
+nb-configuration.xml
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/47/trunk/telefonia-core/nb-configuration.xml
+END
+hello.pdf
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/49/trunk/telefonia-core/hello.pdf
+END
+pom.xml
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/49/trunk/telefonia-core/pom.xml
+END
+Teste.pdf
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/52/trunk/telefonia-core/Teste.pdf
+END

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TabNavigator xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				 xmlns:s="library://ns.adobe.com/flex/spark" 
+				 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="br.mil.pamerj.projects.telefonia.components.*"
+				 creationComplete="initialSetup()">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import br.mil.pamerj.projects.telefonia.events.RamalServiceEvent;
+			import br.mil.pamerj.projects.telefonia.model.Ramal;
+			import br.mil.pamerj.projects.telefonia.services.RamalService;
+			import br.mil.pamerj.projects.telefonia.utils.Utils;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.CloseEvent;
+			import mx.validators.Validator;
+			
+			import spark.events.TextOperationEvent;
+			
+			
+			[Bindable]
+			private var ramalService:RamalService = new RamalService();
+			[Bindable]
+			private var ramais:ArrayCollection;
+			[Bindable]
+			private var ramal:Ramal = new Ramal();
+			
+			
+			private function initialSetup():void {
+				
+				ramalService.addEventListener(
+					RamalServiceEvent.RAMAL_CREATED_EVENT, handleRamalCreated);
+				ramalService.addEventListener(
+					RamalServiceEvent.RAMAL_LOADED_EVENT, handleRamalLoaded);
+				ramalService.addEventListener(
+					RamalServiceEvent.RAMAL_REMOVED_EVENT, handleRamalRemoved);
+				ramalService.addEventListener(
+					RamalServiceEvent.RAMAL_UPDATED_EVENT, handleRamalUpdated);
+				ramalService.addEventListener(
+					RamalServiceEvent.RAMAIS_LOADED_EVENT, handleRamaisLoaded);
+				
+				changeButtonsState();
+				loadData();
+			}
+			
+			private function loadData():void{
+				ramalService.findAll();
+			}
+			/*
+			**
+			** Buttons Handlers
+			**
+			*/
+			
+			private function handleGravarClick():void{
+				var erros:Array = Validator.validateAll(ramalForm.validators);
+				if (erros.length > 0){
+					Alert.show("Por favor, preencha os dados corretamente");
+				}else{
+					ramalService.create(ramalForm.ramal);
+				}
+			}
+			
+			private function handleAtualizarClick():void{
+				var erros:Array = Validator.validateAll(ramalForm.validators);
+				if (erros.length > 0){
+					Alert.show("Por favor, preencha os dados corretamente");
+				}else{
+					ramalService.update(ramalForm.ramal);
+				}
+			}
+			
+			private function handleRemoverClick():void{
+				if(dataList.selectedIndex < 0){
+					Alert.show("Por favor, selecione um item para remover");
+				}else{
+					Alert.show('Tem certeza de que deseja excluir este item?', 
+						'Confirmação', 
+						Alert.OK | Alert.CANCEL,
+						this, confirmRemoverListener, null, Alert.OK);
+				} 
+			}
+			
+			private function handleEditarClick():void{
+				if(dataList.selectedIndex < 0){
+					Alert.show("Por favor, selecione um item para editar");
+				}else{
+					ramalService.find(dataList.selectedItem.id);
+				}
+				
+			}
+			
+			private function handleNovoClick():void{
+				ramal = new Ramal();
+				
+				mainStack.selectedIndex=1;
+			}
+			
+			/*
+			**
+			** SERVICE EVENTS HANDLERS
+			**
+			*/
+			
+			private function handleRamalCreated(event:Event):void{
+				ramalForm.ramal = new Ramal();
+				mainStack.selectedIndex=0;
+				loadData();
+				Alert.show("Ramal cadastrado com sucesso!");
+			}
+			
+			private function handleRamalLoaded(event:RamalServiceEvent):void{
+				ramal = event.ramal
+				mainStack.selectedIndex = 1;
+				
+			}
+			
+			private function handleRamaisLoaded(event:RamalServiceEvent):void{
+				this.ramais = event.ramais;
+				
+			}
+			
+			private function handleRamalRemoved(event:Event):void{
+				ramais.removeItemAt(dataList.selectedIndex);
+				
+			}	
+			
+			private function handleRamalUpdated(event:Event):void {
+				
+				ramais[dataList.selectedIndex] = ramalForm.ramal;
+				ramalForm.ramal = new Ramal();
+				mainStack.selectedIndex=0;
+				Alert.show("Ramal atualizado com sucesso!");
+				
+			}
+			
+			/*
+			**
+			** Outros Métodos
+			**
+			*/
+			
+			private function confirmRemoverListener(event:CloseEvent):void{
+				if (event.detail == Alert.OK)
+					ramalService.remove(dataList.selectedItem.id);
+			}
+			private function changeButtonsState():void{
+				if (mainStack.selectedIndex == 0){
+					Utils.showComponent(novo);
+					Utils.showComponent(editar);
+					Utils.showComponent(remover);
+					Utils.hideComponent(cancelar)
+					Utils.hideComponent(gravar);
+					Utils.hideComponent(atualizar)
+				}else if(mainStack.selectedIndex == 1){
+					Utils.hideComponent(novo);
+					Utils.hideComponent(editar);
+					Utils.hideComponent(remover);
+					Utils.showComponent(cancelar)
+					if(ramalForm.ramal.id > 0){
+						Utils.showComponent(atualizar);
+						Utils.hideComponent(gravar);
+					}else{
+						Utils.showComponent(gravar);
+						Utils.hideComponent(editar);
+					}
+				}
+			}
+			
+			protected function loginTIchangeHandler(event:TextOperationEvent):void
+			{
+				ramalService.searchByLogin(loginTI.text);
+				
+				
+			}
+			protected function numeroTIchangeHandler(event:TextOperationEvent):void
+			{
+				ramalService.searchByNumero(numeroTI.text);
+				
+				
+			}
+		]]>
+	</fx:Script>
+	<s:NavigatorContent label="Ramais">
+		<s:VGroup  left="20" right="20" top="10" bottom="10">
+			<mx:ViewStack id="mainStack" width="100%" height="100%" change="changeButtonsState()">
+				<s:NavigatorContent label="Listar" width="100%" height="100%">
+					<s:layout>
+						<s:VerticalLayout/>
+					</s:layout>
+					<s:VGroup width="100%" height="100%">
+						<s:HGroup verticalAlign="middle">
+							
+							<s:Label text="Ramal: "/>
+							<s:TextInput id="numeroTI" change="numeroTIchangeHandler(event)"/>
+							<s:Label text="Login: "/>
+							<s:TextInput id="loginTI" change="loginTIchangeHandler(event)"/>
+							
+						</s:HGroup>
+						<components:RamalDG width="100%" height="100%" 
+											id="dataList" dataProvider="{ramais}"/>
+					</s:VGroup>
+				</s:NavigatorContent>
+				<s:NavigatorContent label="Editar" width="100%" height="100%">
+					<s:layout>
+						<s:VerticalLayout/>
+					</s:layout>
+					<components:RamalForm 
+										  ramal="{ramal}"
+										  id="ramalForm"/>
+					
+				</s:NavigatorContent>
+			</mx:ViewStack>
+			<s:HGroup width="100%" horizontalAlign="right" verticalAlign="middle">
+				<components:DefaultButton id="novo" label="Novo" click="handleNovoClick()"/>
+				<components:DefaultButton id="remover" label="Remover" click="handleRemoverClick()"/>
+				<components:DefaultButton id="editar" label="Editar" click="handleEditarClick()" />
+				<components:DefaultButton id="cancelar" label="Cancelar" click="mainStack.selectedIndex=0"/>
+				<components:DefaultButton id="gravar" label="Gravar" click="handleGravarClick()"/>
+				<components:DefaultButton id="atualizar" label="Atualizar" click="handleAtualizarClick()"/>
+			</s:HGroup>
+			
+		</s:VGroup>		
+		
+	</s:NavigatorContent>
+</mx:TabNavigator>

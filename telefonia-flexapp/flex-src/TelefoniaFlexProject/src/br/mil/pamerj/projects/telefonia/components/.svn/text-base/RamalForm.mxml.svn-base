@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Form xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<fx:Array id="validators">
+			<mx:StringValidator source="{numeroTI}" property="text" required="true" minLength="3"/>
+		</fx:Array>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import br.mil.pamerj.projects.telefonia.model.Ramal;
+			[Bindable]
+			public var ramal:Ramal = new Ramal();
+		]]>
+	</fx:Script>
+	<s:FormHeading label="Informações do Ramal"/>
+	<s:FormItem label="Responsável (login): ">
+		<s:TextInput id="loginTI" text="{ramal.login}"
+					 change="{ramal.login = loginTI.text}"/>
+	</s:FormItem>
+	<s:FormItem label="Número: ">
+		<s:TextInput  id="numeroTI" text="{ramal.numero}"
+					  change="{ramal.numero = numeroTI.text}"/>
+	</s:FormItem>
+	<s:FormItem label="Descrição">
+		<s:TextInput id="descricaoTI" text="{ramal.descricao}"
+					 change="{ramal.descricao = descricaoTI.text}"/>
+	</s:FormItem>
+	
+</s:Form>

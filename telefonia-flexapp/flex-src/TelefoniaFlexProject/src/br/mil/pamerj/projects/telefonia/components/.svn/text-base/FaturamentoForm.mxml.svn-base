@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Form xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<fx:Array id="validators">
+			
+		</fx:Array>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import br.mil.pamerj.projects.telefonia.model.Faturamento;
+			
+			import mx.controls.Alert;
+			
+			[Bindable]
+			public var faturamento:Faturamento;
+			[Bindable]
+			public var file:FileReference = null;
+			
+			public function localizar():void {
+				if (file == null) {
+					this.file = new FileReference();
+					this.file.addEventListener(Event.SELECT, onSelect);
+					this.file.addEventListener(Event.COMPLETE, onUploadComplete);
+				}
+
+				//utilizando filtro para upload somente de imagem
+				var tipos:FileFilter = new FileFilter(
+					"Arquivos de Texto","*.txt; *.TXT");
+				var tiposArray:Array = new Array(tipos);
+				this.file.browse(tiposArray);
+			}
+			private function onSelect(event:Event):void {
+				this.filenameTI.text = file.name;
+				enviar();
+			}
+			
+			private function onUploadComplete(event:Event):void {
+				Alert.show("Upload completo...");
+			}
+			public function enviar():void {
+				if (this.file == null) return;
+				
+				var request:URLRequest = new URLRequest(
+					"http://10.52.152.2/upload.php");
+				
+				//request.method = URLRequestMethod.POST;
+				
+				try
+				{
+					file.load()					
+					//file.upload(request);
+					
+				} catch (error:Error){
+					Alert.show("Unable to upload file.");
+				}
+				
+			}
+
+
+			
+			
+		]]>
+	</fx:Script>
+	<s:FormHeading label="Faturamento"/>
+	<s:FormItem label="Período">
+		<mx:DateField id="periodoDF"
+					   selectedDate="{faturamento.periodo}"
+					   change="{faturamento.periodo = periodoDF.selectedDate}"
+					  />
+	</s:FormItem>
+	<s:FormItem label="Arquivo">
+		<s:HGroup>
+			<s:TextInput id="filenameTI"/>
+			<s:Button label="Procurar" click="localizar();"/>
+		</s:HGroup>
+	</s:FormItem>	
+</s:Form>

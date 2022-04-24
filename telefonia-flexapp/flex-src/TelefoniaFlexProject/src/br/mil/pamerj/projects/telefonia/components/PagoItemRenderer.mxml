@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:GridItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					xmlns:mx="library://ns.adobe.com/flex/mx" 
+					clipAndEnableScrolling="true"
+					creationComplete="creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import br.mil.pamerj.projects.telefonia.events.FaturaServiceEvent;
+			import br.mil.pamerj.projects.telefonia.events.FaturamentoServiceEvent;
+			import br.mil.pamerj.projects.telefonia.model.Fatura;
+			import br.mil.pamerj.projects.telefonia.services.FaturaService;
+			import br.mil.pamerj.projects.telefonia.services.FaturamentoService;
+			
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			
+			
+			private var faturaService:FaturaService = new FaturaService();
+			
+			override public function prepare(hasBeenRecycled:Boolean):void {
+				//lblData.text = data[column.dataField]
+			}
+			protected function pagoChangeHandler(event:Event):void
+			{
+				data.pago = pagoCk.selected;
+				faturaService.update(data as Fatura);
+				//this.dispatchEvent(new Event("selectionChanged",true));
+			}
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				faturaService.addEventListener(
+					FaturaServiceEvent.FATURA_UPDATED_EVENT, handleFaturaUpdated);
+				
+			}
+			private function handleFaturaUpdated(event:FaturaServiceEvent):void{
+				
+			}
+			
+		]]>
+	</fx:Script>
+	<s:HGroup left="10" right="10" verticalAlign="middle" horizontalAlign="center">
+		<s:CheckBox id="pagoCk" change="pagoChangeHandler(event)"
+					selected="{data.pago}"/>
+	</s:HGroup>
+	
+		
+	
+</s:GridItemRenderer>

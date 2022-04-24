@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TabNavigator xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				 xmlns:s="library://ns.adobe.com/flex/spark" 
+				 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="br.mil.pamerj.projects.telefonia.components.*"
+				 creationComplete="initialSetup()">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import br.mil.pamerj.projects.telefonia.events.AdminUserServiceEvent;
+			import br.mil.pamerj.projects.telefonia.model.AdminUser;
+			import br.mil.pamerj.projects.telefonia.services.UserService;
+			import br.mil.pamerj.projects.telefonia.utils.Utils;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.CloseEvent;
+			import mx.validators.Validator;
+			
+			
+			[Bindable]
+			private var userService:UserService = new UserService();
+			[Bindable]
+			private var users:ArrayCollection;
+			[Bindable]
+			private var user:AdminUser = new AdminUser();
+			
+			
+			private function initialSetup():void {
+				
+				userService.addEventListener(
+					AdminUserServiceEvent.USER_CREATED_EVENT, handleUserCreated);
+				userService.addEventListener(
+					AdminUserServiceEvent.USER_LOADED_EVENT, handleUserLoaded);
+				userService.addEventListener(
+					AdminUserServiceEvent.USER_REMOVED_EVENT, handleUserRemoved);
+				userService.addEventListener(
+					AdminUserServiceEvent.USER_UPDATED_EVENT, handleUserUpdated);
+				userService.addEventListener(
+					AdminUserServiceEvent.USERS_LOADED_EVENT, handleUsersLoaded);
+				
+				changeButtonsState();
+				loadData();
+			}
+			
+			private function loadData():void{
+				userService.findAll();
+			}
+			/*
+			**
+			** Buttons Handlers
+			**
+			*/
+			
+			private function handleGravarClick():void{
+				var erros:Array = Validator.validateAll(userForm.validators);
+				if (erros.length > 0){
+					Alert.show("Por favor, preencha os dados corretamente");
+				}else{
+					userService.create(userForm.user);
+				}
+			}
+			
+			private function handleAtualizarClick():void{
+				var erros:Array = Validator.validateAll(userForm.validators);
+				if (erros.length > 0){
+					Alert.show("Por favor, preencha os dados corretamente");
+				}else{
+					userService.update(userForm.user);
+				}
+			}
+			
+			private function handleRemoverClick():void{
+				if(dataList.selectedIndex < 0){
+					Alert.show("Por favor, selecione um item para remover");
+				}else{
+					Alert.show('Tem certeza de que deseja excluir este item?', 
+						'Confirmação', 
+						Alert.OK | Alert.CANCEL,
+						this, confirmRemoverListener, null, Alert.OK);
+				} 
+			}
+			
+			private function handleEditarClick():void{
+				if(dataList.selectedIndex < 0){
+					Alert.show("Por favor, selecione um item para editar");
+				}else{
+					userService.find(dataList.selectedItem.id);
+				}
+				
+			}
+			
+			private function handleNovoClick():void{
+				user = new AdminUser();
+				
+				mainStack.selectedIndex=1;
+			}
+			
+			/*
+			**
+			** SERVICE EVENTS HANDLERS
+			**
+			*/
+			
+			private function handleUserCreated(event:Event):void{
+				userForm.user = new AdminUser();
+				mainStack.selectedIndex=0;
+				loadData();
+				Alert.show("Usuário cadastrado com sucesso!");
+			}
+			
+			private function handleUserLoaded(event:AdminUserServiceEvent):void{
+				user = event.user
+				mainStack.selectedIndex = 1;
+				
+			}
+			
+			private function handleUsersLoaded(event:AdminUserServiceEvent):void{
+				this.users = event.users;
+				
+			}
+			
+			private function handleUserRemoved(event:Event):void{
+				users.removeItemAt(dataList.selectedIndex);
+				
+			}	
+			
+			private function handleUserUpdated(event:Event):void {
+				
+				users[dataList.selectedIndex] = userForm.user;
+				userForm.user = new AdminUser();
+				mainStack.selectedIndex=0;
+				Alert.show("Usuário atualizado com sucesso!");
+				
+			}
+			
+			/*
+			**
+			** Outros Métodos
+			**
+			*/
+			
+			private function confirmRemoverListener(event:CloseEvent):void{
+				if (event.detail == Alert.OK)
+					userService.remove(dataList.selectedItem.id);
+			}
+			private function changeButtonsState():void{
+				if (mainStack.selectedIndex == 0){
+					Utils.showComponent(novo);
+					Utils.showComponent(editar);
+					Utils.showComponent(remover);
+					Utils.hideComponent(cancelar)
+					Utils.hideComponent(gravar);
+					Utils.hideComponent(atualizar)
+				}else if(mainStack.selectedIndex == 1){
+					Utils.hideComponent(novo);
+					Utils.hideComponent(editar);
+					Utils.hideComponent(remover);
+					Utils.showComponent(cancelar)
+					if(userForm.user.id > 0){
+						Utils.showComponent(atualizar);
+						Utils.hideComponent(gravar);
+					}else{
+						Utils.showComponent(gravar);
+						Utils.hideComponent(editar);
+					}
+				}
+			}
+		]]>
+	</fx:Script>
+	<s:NavigatorContent label="Administradores">
+		<s:VGroup  left="20" right="20" top="10" bottom="10">
+			<mx:ViewStack id="mainStack" width="100%" height="100%" change="changeButtonsState()">
+				<s:NavigatorContent label="Listar" width="100%" height="100%">
+					<s:layout>
+						<s:VerticalLayout/>
+					</s:layout>
+					<s:VGroup width="100%" height="100%">
+						<components:UserDG width="100%" height="100%" 
+											id="dataList" dataProvider="{users}"/>
+					</s:VGroup>
+				</s:NavigatorContent>
+				<s:NavigatorContent label="Editar" width="100%" height="100%">
+					<s:layout>
+						<s:VerticalLayout/>
+					</s:layout>
+					<components:UserForm 
+										  user="{user}"
+										  id="userForm"/>
+					
+				</s:NavigatorContent>
+			</mx:ViewStack>
+			<s:HGroup width="100%" horizontalAlign="right" verticalAlign="middle">
+				<components:DefaultButton id="novo" label="Novo" click="handleNovoClick()"/>
+				<components:DefaultButton id="remover" label="Remover" click="handleRemoverClick()"/>
+				<components:DefaultButton id="editar" label="Editar" click="handleEditarClick()" />
+				<components:DefaultButton id="cancelar" label="Cancelar" click="mainStack.selectedIndex=0"/>
+				<components:DefaultButton id="gravar" label="Gravar" click="handleGravarClick()"/>
+				<components:DefaultButton id="atualizar" label="Atualizar" click="handleAtualizarClick()"/>
+			</s:HGroup>
+			
+		</s:VGroup>		
+		
+	</s:NavigatorContent>
+</mx:TabNavigator>

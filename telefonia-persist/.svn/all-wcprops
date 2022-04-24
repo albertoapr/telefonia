@@ -1,0 +1,21 @@
+K 26
+svn:wc:ra_dav:activity-url
+V 14
+/svn/!svn/act/
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/57/trunk/telefonia-persist
+END
+nb-configuration.xml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/48/trunk/telefonia-persist/nb-configuration.xml
+END
+pom.xml
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/55/trunk/telefonia-persist/pom.xml
+END

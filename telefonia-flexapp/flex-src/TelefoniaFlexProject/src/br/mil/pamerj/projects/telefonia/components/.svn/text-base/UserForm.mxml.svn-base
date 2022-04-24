@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Form xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<fx:Array id="validators">
+			<mx:StringValidator source="{loginTI}" property="text" required="true"/>
+		</fx:Array>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import br.mil.pamerj.projects.telefonia.model.AdminUser;
+			
+			[Bindable]
+			public var user:AdminUser = new AdminUser();
+		]]>
+	</fx:Script>
+	<s:FormHeading label="Informações do Usuário"/>
+	<s:FormItem label="Administrador (login): " required="true">
+		<s:TextInput id="loginTI" text="{user.login}"
+					 change="{user.login = loginTI.text}"/>
+	</s:FormItem>
+	
+</s:Form>

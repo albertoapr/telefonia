@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/47/trunk/telefonia-api/src/main/java/mil/br/pamerj/projects/telefonia/api
+END
+LigacaoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/51/trunk/telefonia-api/src/main/java/mil/br/pamerj/projects/telefonia/api/LigacaoService.java
+END
+RelatorioService.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/51/trunk/telefonia-api/src/main/java/mil/br/pamerj/projects/telefonia/api/RelatorioService.java
+END
+FaturaService.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/51/trunk/telefonia-api/src/main/java/mil/br/pamerj/projects/telefonia/api/FaturaService.java
+END
+ConfigService.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/6/trunk/telefonia-api/src/main/java/mil/br/pamerj/projects/telefonia/api/ConfigService.java
+END
+AdminUserService.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/48/trunk/telefonia-api/src/main/java/mil/br/pamerj/projects/telefonia/api/AdminUserService.java
+END
+ServiceFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/6/trunk/telefonia-api/src/main/java/mil/br/pamerj/projects/telefonia/api/ServiceFactory.java
+END

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="mil.br.pamerj.projects.telefonia.model">
+  <class name="Fatura" table="FATURA">
+    <id column="id" name="id">
+      <generator class="native"/>
+    </id>
+    <property column="aberto" name="aberto"/>
+    <property column="pago" name="pago"/>
+    <many-to-one cascade="save-update" class="Faturamento" column="faturamento_id" lazy="false" name="faturamento" not-null="true"/>
+    <many-to-one cascade="save-update" class="Ramal" column="ramal_id" lazy="false" name="ramal" not-null="true"/>
+    <set cascade="save-update" lazy="true" name="items" table="ITEM_FATURA">
+      <key column="fatura_id"/>
+      <composite-element class="ItemFatura">
+        <property column="natureza" name="natureza"/>
+        <many-to-one class="Ligacao" column="ligacao_id" lazy="false" name="ligacao" not-null="true"/>
+      </composite-element>
+    </set>
+  </class>
+</hibernate-mapping>

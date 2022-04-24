@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Button xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  implements="br.mil.pamerj.projects.telefonia.components.Hiddenable">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			public function get defaultHeight():int {
+				return 20;
+				
+			}
+			public function get defaultWidth():int {
+				return 100;
+			}
+		]]>
+	</fx:Script>
+</s:Button>

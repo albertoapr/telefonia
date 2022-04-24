@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:comps="components.*" layout="absolute" creationComplete="loadPDF()" xmlns:thirdy="br.mil.pamerj.projects.telefonia.components.thirdy.*">
+
+<mx:Script>
+	<![CDATA[
+		[Bindable] private var srcUrl:String;
+		private function loadPDF():void {
+			srcUrl="http://localhost:8084/telefonia-flexapp/bin/test.pdf";
+		}
+		private function btnPrintPDFClickHandler(srcUrl:String):void {
+			ExternalInterface.call("printIFramePDF", srcUrl);
+		}
+	]]>
+</mx:Script>
+
+<mx:HDividedBox borderColor="blue" x="10" y="25" width="100%" height="100%">
+  <mx:Panel title="Flex PDF Select" x="25" y="25" width="600" height="100%">
+   <mx:VBox paddingTop="10" paddingLeft="5">
+ 		<mx:Button id="btnPrintPDF" x="250" y="300" label="Print PDF" click="btnPrintPDFClickHandler(srcUrl)"/>
+   </mx:VBox>
+  </mx:Panel>
+  <mx:Panel title="iFrame PDF Loader" x="630" y="25" width="100%" height="100%">
+      <mx:Canvas width="100%" height="100%">
+         <thirdy:IFrame id="iFr" visible="true" source="{srcUrl}" x="0" y="0" width="100%" height="100%"/>
+      </mx:Canvas>  
+   </mx:Panel>
+</mx:HDividedBox>
+</mx:Application>

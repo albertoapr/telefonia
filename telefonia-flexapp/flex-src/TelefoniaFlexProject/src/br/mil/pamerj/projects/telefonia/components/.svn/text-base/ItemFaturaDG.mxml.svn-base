@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:DataGrid xmlns:fx="http://ns.adobe.com/mxml/2009"
+			xmlns:s="library://ns.adobe.com/flex/spark"
+			xmlns:mx="library://ns.adobe.com/flex/mx"
+			doubleClickEnabled="false"
+			
+			>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<mx:DateFormatter id="formatterData" formatString="DD/MM/YY HH:NN" />
+		<mx:DateFormatter id="formatterDuracao" formatString="00:NN:SS" />
+		<mx:CurrencyFormatter id="formatterCusto" 
+			alignSymbol="left" 
+			currencySymbol="R$ "
+			decimalSeparatorFrom=","
+			decimalSeparatorTo=","
+			precision="2"
+			rounding="none"
+			thousandsSeparatorFrom="."
+			thousandsSeparatorTo="."
+			useNegativeSign="false"
+			useThousandsSeparator="true"
+			/>  
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import br.mil.pamerj.projects.telefonia.model.ItemFatura;
+			import br.mil.pamerj.projects.telefonia.model.Ligacao;
+			
+			import mx.controls.Alert;
+			import mx.controls.dataGridClasses.DataGridColumn;
+			
+			
+			[Bindable]
+			public var enabledNatureza:Boolean = true;
+			
+			private function labelDataHora(item:Object, col:GridColumn):String{
+				return formatterData.format((item as ItemFatura).ligacao.dataHora as Date);	
+			}
+			private function labelDuracao(item:Object, col:GridColumn):String{
+				return formatterDuracao.format((item as  ItemFatura).ligacao.duracao as Date);	
+			}
+			private function labelCusto(item:Object, col:GridColumn):String{
+				return formatterCusto.format((item as ItemFatura).ligacao.custo as Number);	
+			}
+			private function labelNumero(item:Object, col:GridColumn):String{
+				var numero:String = (item as ItemFatura).ligacao.numero; 
+				if(numero.length == 8){
+					var parte1:String = numero.substring(0,4)
+					var parte2:String = numero.substring(4,8)
+				}
+				return parte1 + "-" + parte2;
+			}
+			
+			
+			
+		]]>
+	</fx:Script>
+	<s:columns>
+		<s:ArrayList>
+			<s:GridColumn dataField="ligacao.numero" headerText="Número"/>
+			<s:GridColumn dataField="ligacao.dataHora" headerText="Data" labelFunction="labelDataHora" />
+			<s:GridColumn dataField="ligacao.duracao" headerText="Duração" labelFunction="labelDuracao" />
+			<s:GridColumn dataField="ligacao.custo" headerText="Custo" labelFunction="labelCusto" />
+			<s:GridColumn dataField="ligacao.local" headerText="Local"/>
+			<s:GridColumn dataField="natureza" headerText="Natureza" visible="{!enabledNatureza}"/>
+			<s:GridColumn dataField="natureza" headerText="Natureza" 
+						  itemRenderer="br.mil.pamerj.projects.telefonia.components.NaturezaItemRenderer"
+						  editable="true" visible="{enabledNatureza}" />
+			
+		</s:ArrayList>
+	</s:columns>
+	
+</s:DataGrid>

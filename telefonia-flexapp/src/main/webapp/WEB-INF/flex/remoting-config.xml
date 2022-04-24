@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service id="remoting-service" class="flex.messaging.services.RemotingService">
+
+    <adapters>
+        <adapter-definition id="java-object"
+			class="flex.messaging.services.remoting.adapters.JavaAdapter"
+			default="true" />
+    </adapters>
+
+    <default-channels>
+        <channel ref="my-amf" />
+    </default-channels>
+    <destination id="echoServiceDestination">
+        <properties>
+            <source>mil.br.pamerj.projects.telefonia.app.teste.EchoService</source>
+        </properties>
+    </destination>
+    <destination id="ligacaoServiceDestination">
+        <properties>
+            <source>mil.br.pamerj.projects.telefonia.core.SimpleLigacaoService</source>
+        </properties>
+    </destination>
+    <destination id="userServiceDestination">
+        <properties>
+            <source>mil.br.pamerj.projects.telefonia.core.SimpleAdminUserService</source>
+        </properties>
+    </destination>
+     <destination id="faturaServiceDestination">
+        <properties>
+            <source>mil.br.pamerj.projects.telefonia.core.SimpleFaturaService</source>
+        </properties>
+    </destination>
+    <destination id="configServiceDestination">
+        <properties>
+            <source>mil.br.pamerj.projects.telefonia.core.ConfigLigacaoService</source>
+        </properties>
+    </destination>
+    <destination id="relatorioServiceDestination">
+        <properties>
+            <source>mil.br.pamerj.projects.telefonia.core.ITextRelatorioService</source>
+        </properties>
+    </destination>
+
+
+</service>

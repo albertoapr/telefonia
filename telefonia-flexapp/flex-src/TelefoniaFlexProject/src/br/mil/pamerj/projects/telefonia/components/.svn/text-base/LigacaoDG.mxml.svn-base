@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:DataGrid xmlns:fx="http://ns.adobe.com/mxml/2009"
+			xmlns:s="library://ns.adobe.com/flex/spark"
+			xmlns:mx="library://ns.adobe.com/flex/mx"
+			>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<mx:DateFormatter id="formatterData" formatString="DD/MM/YY HH:NN" />
+		<mx:DateFormatter id="formatterDuracao" formatString="00:NN:SS" />
+		<mx:CurrencyFormatter id="formatterCusto" 
+			alignSymbol="left" 
+			currencySymbol="R$ "
+			decimalSeparatorFrom=","
+			decimalSeparatorTo=","
+			precision="2"
+			rounding="none"
+			thousandsSeparatorFrom="."
+			thousandsSeparatorTo="."
+			useNegativeSign="false"
+			useThousandsSeparator="true"
+			/>  
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import br.mil.pamerj.projects.telefonia.model.Ligacao;
+			
+			import mx.controls.dataGridClasses.DataGridColumn;
+			private function labelDataHora(item:Object, col:GridColumn):String{
+				return formatterData.format((item as Ligacao).dataHora as Date);	
+			}
+			private function labelDuracao(item:Object, col:GridColumn):String{
+				return formatterDuracao.format((item as Ligacao).duracao as Date);	
+			}
+			private function labelCusto(item:Object, col:GridColumn):String{
+				return formatterCusto.format((item as Ligacao).custo as Number);	
+			}
+			private function labelNumero(item:Object, col:GridColumn):String{
+				var numero:String = (item as Ligacao).numero; 
+				if(numero.length == 8){
+					var parte1:String = numero.substring(0,4)
+					var parte2:String = numero.substring(4,8)
+				}
+				return parte1 + "-" + parte2;
+			}
+		]]>
+	</fx:Script>
+	<s:columns>
+		<s:ArrayList>
+			<s:GridColumn dataField="numero" headerText="Número"/>
+			<s:GridColumn dataField="dataHora" headerText="Data" labelFunction="labelDataHora" />
+			<s:GridColumn dataField="duracao" headerText="Duração" labelFunction="labelDuracao" />
+			<s:GridColumn dataField="custo" headerText="Custo" labelFunction="labelCusto" />
+			<s:GridColumn dataField="local" headerText="Local"/>
+			
+		</s:ArrayList>
+	</s:columns>
+	
+</s:DataGrid>

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TabNavigator xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				 xmlns:s="library://ns.adobe.com/flex/spark" 
+				 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="br.mil.pamerj.projects.telefonia.components.*"
+				 creationComplete="initialSetup()">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<mx:DateFormatter id="formatterMes" formatString="MM / YYYY" />
+		<mx:CurrencyFormatter id="formatterMoeda" 
+							  alignSymbol="left" 
+							  currencySymbol="R$ "
+							  decimalSeparatorFrom=","
+							  decimalSeparatorTo=","
+							  precision="2"
+							  rounding="none"
+							  thousandsSeparatorFrom="."
+							  thousandsSeparatorTo="."
+							  useNegativeSign="false"
+							  useThousandsSeparator="true"
+							  />  
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import br.mil.pamerj.projects.telefonia.events.FaturaServiceEvent;
+			import br.mil.pamerj.projects.telefonia.events.FaturamentoServiceEvent;
+			import br.mil.pamerj.projects.telefonia.events.ItemSelectedEvent;
+			import br.mil.pamerj.projects.telefonia.events.RamalServiceEvent;
+			import br.mil.pamerj.projects.telefonia.events.RelatorioServiceEvent;
+			import br.mil.pamerj.projects.telefonia.model.Fatura;
+			import br.mil.pamerj.projects.telefonia.model.Faturamento;
+			import br.mil.pamerj.projects.telefonia.model.ItemFatura;
+			import br.mil.pamerj.projects.telefonia.model.Ramal;
+			import br.mil.pamerj.projects.telefonia.services.FaturaService;
+			import br.mil.pamerj.projects.telefonia.services.FaturamentoService;
+			import br.mil.pamerj.projects.telefonia.services.RamalService;
+			import br.mil.pamerj.projects.telefonia.services.RelatorioService;
+			import br.mil.pamerj.projects.telefonia.utils.Utils;
+			
+			import flash.sampler.NewObjectSample;
+			
+			import mx.collections.ArrayCollection;
+			import mx.collections.HierarchicalData;
+			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
+			import mx.events.CloseEvent;
+			import mx.managers.PopUpManager;
+			import mx.printing.FlexPrintJob;
+			import mx.printing.FlexPrintJobScaleType;
+			import mx.validators.Validator;
+			
+			import spark.components.TitleWindow;
+			import spark.events.IndexChangeEvent;
+			
+
+			
+			private var faturaService:FaturaService = new FaturaService();
+			
+			private var relatorioService:RelatorioService = new RelatorioService();
+
+			private var faturamentoService:FaturamentoService = new FaturamentoService();
+			
+			[Bindable]
+			private var faturamentos:ArrayCollection;
+			[Bindable]
+			private var faturas:ArrayCollection = new ArrayCollection();
+			[Bindable]
+			private var fatura:Fatura = new Fatura();
+			
+			private function initialSetup():void {
+				faturaService.addEventListener(
+					FaturaServiceEvent.FATURAS_LOADED_EVENT, handleFaturasLoaded);
+				faturaService.addEventListener(
+					FaturaServiceEvent.FATURA_LOADED_EVENT, handleFaturaLoaded);
+				relatorioService.addEventListener(RelatorioServiceEvent.RELATORIO_GENERATED_EVENT, handleRelatorioGenerated);
+				faturamentoService.addEventListener(FaturamentoServiceEvent.FATURAMENTOS_LOADED_EVENT, handleFaturamentosLoaded);
+				loadData();
+				changeButtonsState();
+				
+			}
+			
+			private function loadData():void{
+				faturamentoService.findAll();
+				//faturaService.findAll();
+			}
+			
+			/*
+			**
+			** Buttons Handlers
+			**
+			*/
+			
+			private function handleVisualizarClick():void{
+				if(dataList.selectedIndex < 0){
+					Alert.show("Por favor, selecione uma fatura");
+				}else{
+					
+					var faturaId:Number = (dataList.selectedItem as Fatura).id;
+						faturaService.find(faturaId);
+				}
+				
+			}
+			/*
+			**
+			** SERVICE EVENTS HANDLERS
+			**
+			*/
+			private function handleFaturamentosLoaded(event:FaturamentoServiceEvent):void{
+				this.faturamentos = event.faturamentos;
+				periodoCB.selectedIndex = 0;
+				//ligacaoService.findAll();
+				//faturaService.findAllByPeriodo((faturamentos.getItemAt(0) as Faturamento).periodo);
+				faturaService.findAllByPeriodoAndStatus((faturamentos.getItemAt(0) as Faturamento).periodo, true);
+				
+			}			
+			private function handleFaturasLoaded(event:FaturaServiceEvent):void{
+				this.faturas = event.faturas;
+			}
+			private function handleFaturaLoaded(event:FaturaServiceEvent):void{
+				this.fatura = event.fatura;
+				mainStack.selectedIndex = 1;
+			}
+			private function handleRelatorioGenerated(event:RelatorioServiceEvent):void{
+				var printScreen:PrintView = new PrintView();
+				
+				
+				printScreen.relatorio = event.relatorio;
+				
+				
+				PopUpManager.addPopUp(printScreen, this,true);
+				PopUpManager.centerPopUp(printScreen);
+			}
+			private function changeButtonsState():void{
+				if (mainStack.selectedIndex == 0){
+					Utils.showComponent(detalhar);
+					Utils.showComponent(imprimirTodos);
+					Utils.hideComponent(cancelar)
+					Utils.hideComponent(imprimir);
+					
+				}else if(mainStack.selectedIndex == 1){
+					Utils.hideComponent(detalhar);
+					Utils.hideComponent(imprimirTodos);
+					Utils.showComponent(cancelar)
+					Utils.showComponent(imprimir);
+				}
+			}
+			protected function dataList_itemSelectedEventHandler(event:ItemSelectedEvent):void
+			{
+				
+				
+				var faturaId:Number = new Number(event.item.Id);
+				if(faturaId > 0 ){
+					faturaService.find(faturaId);
+				}
+				
+			}
+			protected function periodoCBchangeHandler(event:IndexChangeEvent):void
+			{
+				var aberto:Boolean = false;
+				if(statusCB.selectedItem == "ABERTAS"){
+					aberto = true;	
+				}
+				faturaService.findAllByPeriodoAndStatus((periodoCB.selectedItem as Faturamento).periodo, aberto);
+				
+			}
+			protected function imprimirClickHandler(event:MouseEvent):void
+			{
+				
+				relatorioService.gerarFatura(fatura);
+			}
+
+			protected function imprimirTodosClickHandler(event:MouseEvent):void
+			{
+				if(faturas.length < 1){
+					Alert.show("Aguarde o carregamento das faturas");
+				}else{
+					relatorioService.gerarRelatorioFaturas(faturas);
+					
+				}
+			}
+			
+			
+			private function labelPeriodo(item:Object):String{
+				return formatterMes.format((item as Faturamento).periodo as Date).toUpperCase();	
+			}
+			
+			protected function statuschangeHandler(event:IndexChangeEvent):void
+			{
+				var aberto:Boolean = false;
+				if(statusCB.selectedItem == "ABERTAS"){
+					aberto = true;	
+				}
+				faturaService.findAllByPeriodoAndStatus((periodoCB.selectedItem as Faturamento).periodo, aberto);
+				
+			}
+			
+		]]>
+	</fx:Script>
+	<s:NavigatorContent label="Faturas">
+		<s:VGroup  left="20" right="20" top="10" bottom="10">
+			<mx:ViewStack id="mainStack" width="100%" height="100%" change="changeButtonsState()">
+				<s:NavigatorContent label="Listar" width="100%" height="100%">
+					<s:layout>
+						<s:VerticalLayout/>
+					</s:layout>
+					<s:VGroup width="100%" height="100%">
+						<s:Label fontWeight="bold" fontSize="16" text="Faturas"/>
+						
+						<s:HGroup verticalAlign="middle">
+							<s:Label text="Período: "/>
+							<s:ComboBox id="periodoCB" dataProvider="{faturamentos}" 
+										change="periodoCBchangeHandler(event)"
+										labelFunction="labelPeriodo"/>
+							
+							<s:Label text="Status: "/>
+							<components:StatusCB id="statusCB" change="statuschangeHandler(event)"/>
+						</s:HGroup>
+						<components:FaturaAdminDG width="100%" height="100%" 
+											id="dataList" dataProvider="{faturas}"/>
+					</s:VGroup>
+				</s:NavigatorContent>
+				<s:NavigatorContent label="Listar" width="100%" height="100%">
+					<s:layout>
+						<s:VerticalLayout/>
+					</s:layout>
+					<s:VGroup width="100%" height="100%">
+						<s:Label fontWeight="bold" fontSize="16" text="{'FATURA MÊS ' + 
+								 formatterMes.format(fatura.faturamento.periodo).toUpperCase() +
+								 ' - COD.: ' + fatura.ramal.numero}"/>
+						<components:ItemFaturaDG width="100%" height="100%"
+											  id="itemsFaturaDG" dataProvider="{fatura.items}" enabledNatureza="{fatura.aberto}"/>
+						<s:HGroup width="100%">
+							<s:VGroup width="200" horizontalAlign="left">
+								<s:Label fontSize="14" text="Total em ligações particulares: "
+										 verticalAlign="bottom"/>
+								<s:Label fontSize="14" text="Total em ligações à serviço: "
+										 verticalAlign="bottom"/>
+								<s:Label fontSize="14" text="Total em ligações: "
+										 verticalAlign="bottom"/>
+							</s:VGroup>
+							<s:VGroup width="100%" horizontalAlign="left">
+								<s:Label fontWeight="bold" fontSize="14" id="totalParticular" text="{formatterMoeda.format(fatura.custoParticular)}"
+										 verticalAlign="bottom"/>
+								<s:Label fontWeight="bold" fontSize="14" id="totalServico" text="{formatterMoeda.format(fatura.totalServico)}"
+										 verticalAlign="bottom"/>
+								<s:Label fontWeight="bold" fontSize="14" id="total" text="{formatterMoeda.format(fatura.custoTotal)}: "
+										 verticalAlign="bottom"/>
+							</s:VGroup>
+							
+						</s:HGroup>
+					</s:VGroup>
+				</s:NavigatorContent>
+				
+			</mx:ViewStack>
+			<s:HGroup width="100%" horizontalAlign="right" verticalAlign="middle">
+				
+				
+				<components:DefaultButton id="detalhar" label="Detalhar" click="handleVisualizarClick()"/>
+				<components:DefaultButton id="cancelar" label="Voltar" click="mainStack.selectedIndex=0"/>
+				<components:DefaultButton id="imprimirTodos" label="Imprimir PDF" click="imprimirTodosClickHandler(event)"/>
+				<components:DefaultButton id="imprimir" label="Imprimir PDF" click="imprimirClickHandler(event)"/>
+			</s:HGroup>
+			
+		</s:VGroup>		
+		
+	</s:NavigatorContent>
+</mx:TabNavigator>

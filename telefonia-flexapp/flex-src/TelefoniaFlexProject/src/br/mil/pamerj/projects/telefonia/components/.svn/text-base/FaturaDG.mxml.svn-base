@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:AdvancedDataGrid xmlns:fx="http://ns.adobe.com/mxml/2009"
+			xmlns:s="library://ns.adobe.com/flex/spark"
+			xmlns:mx="library://ns.adobe.com/flex/mx"
+			itemDoubleClick="advanceddatagrid1ItemDoubleClickHandler(event)"
+			doubleClickEnabled="true"
+			initialize="gc.refresh();"
+			>
+	
+
+	<fx:Metadata>
+		[Event(name="itemSelectedEvent", type="br.mil.pamerj.projects.telefonia.events.ItemSelectedEvent")]
+	</fx:Metadata>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<mx:CurrencyFormatter id="formatterMoeda" 
+							  alignSymbol="left" 
+							  currencySymbol="R$ "
+							  decimalSeparatorFrom=","
+							  decimalSeparatorTo=","
+							  precision="2"
+							  rounding="none"
+							  thousandsSeparatorFrom="."
+							  thousandsSeparatorTo="."
+							  useNegativeSign="false"
+							  useThousandsSeparator="true"
+							  />  
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import br.mil.pamerj.projects.telefonia.events.ItemSelectedEvent;
+			import br.mil.pamerj.projects.telefonia.model.Fatura;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.controls.dataGridClasses.DataGridColumn;
+			import mx.events.ListEvent;
+			
+			import spark.components.gridClasses.GridColumn;
+			[Bindable]
+			public var lista:ArrayCollection = new ArrayCollection();
+			private function label(item:Object, col:AdvancedDataGridColumn):String{
+				return item.descricao + " ( COD.: " + item.numero + ")";	
+			}
+			private function labelParticular(item:Object, col:AdvancedDataGridColumn):String{
+				return formatterMoeda.format(new Number(item.TotalParticular));	
+				
+			}
+			private function labelServico(item:Object, col:AdvancedDataGridColumn):String{
+				return formatterMoeda.format(new Number(item.TotalServico));	
+				
+			}
+			private function labelTotal(item:Object, col:AdvancedDataGridColumn):String{
+				return formatterMoeda.format(new Number(item.Total));	
+				
+			}
+			protected function advanceddatagrid1ItemDoubleClickHandler(event:ListEvent):void
+			{
+				
+				var e:ItemSelectedEvent = new ItemSelectedEvent(ItemSelectedEvent.ITEM_SELECTED_EVENT,
+					event.currentTarget.selectedItem);
+				this.dispatchEvent(e);
+				
+			}
+			
+		]]>
+	</fx:Script>
+	
+		<mx:dataProvider>
+			<mx:GroupingCollection2 id="gc" source="{lista}">
+				<mx:grouping>
+					<mx:Grouping>
+						<mx:GroupingField name="Faturas"/>
+						<mx:GroupingField name="Status"/>
+						
+					</mx:Grouping>
+				</mx:grouping>
+			</mx:GroupingCollection2>
+		</mx:dataProvider>        
+	<mx:columns>
+		<mx:AdvancedDataGridColumn dataField="GroupLabel" headerText="Faturas"/>
+		<mx:AdvancedDataGridColumn dataField="Fatura" headerText="Mês"/>
+		<mx:AdvancedDataGridColumn dataField="TotalParticular" headerText="Particular" labelFunction="labelParticular"/>
+		<mx:AdvancedDataGridColumn dataField="TotalServico" headerText="Servico" labelFunction="labelServico"/>
+		<mx:AdvancedDataGridColumn dataField="Total" headerText="Total" labelFunction="labelTotal"/>
+		<mx:AdvancedDataGridColumn dataField="Ramal" headerText="Identificador CENTEL"/>
+		<mx:AdvancedDataGridColumn dataField="Pago" headerText="Pago"/>
+		
+	</mx:columns>	
+</mx:AdvancedDataGrid>

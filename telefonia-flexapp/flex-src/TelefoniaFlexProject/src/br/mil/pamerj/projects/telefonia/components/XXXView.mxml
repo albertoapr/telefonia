@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TabNavigator xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				 xmlns:s="library://ns.adobe.com/flex/spark" 
+				 xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+
+		
+	<s:NavigatorContent width="100%" height="100%" label="Uso Individual">
+		<s:VGroup left="10" right="10" top="10" bottom="10">
+			<s:DataGrid left="20" right="20" top="20" bottom="20" width="100%"
+						height="100%" requestedRowCount="4">
+				<s:columns>
+					<s:ArrayList>
+						<s:GridColumn dataField="dataField1" headerText="Número"/>
+						<s:GridColumn dataField="dataField2" headerText="Data"/>
+						<s:GridColumn dataField="dataField3" headerText="Duração"/>
+						<s:GridColumn dataField="dataField1" headerText="Custo"/>
+						<s:GridColumn dataField="dataField1" headerText="Local"/>
+						<s:GridColumn dataField="dataField1" headerText="Tipo"/>
+						<s:GridColumn dataField="dataField1" headerText="Natureza" itemRenderer="br.mil.pamerj.projects.telefonia.components.NaturezaItemRenderer"/>
+					</s:ArrayList>
+				</s:columns>
+				<s:typicalItem>
+					<fx:Object dataField1="Sample Data" dataField2="Sample Data"
+							   dataField3="Sample Data"></fx:Object>
+				</s:typicalItem>
+				<s:ArrayList>
+					<fx:Object dataField1="data1" dataField2="data1" dataField3="data1"></fx:Object>
+					<fx:Object dataField1="data2" dataField2="data2" dataField3="data2"></fx:Object>
+					<fx:Object dataField1="data3" dataField2="data3" dataField3="data3"></fx:Object>
+					<fx:Object dataField1="data4" dataField2="data4" dataField3="data4"></fx:Object>
+				</s:ArrayList>
+			</s:DataGrid>
+			<s:HGroup width="100%" horizontalAlign="right" verticalAlign="middle">
+				<s:VGroup width="100%" horizontalAlign="left">
+					<s:Label fontSize="14" text="Total em ligações particulares: "
+							 verticalAlign="bottom"/>
+					<s:Label fontSize="14" text="Total em ligações à serviço: "
+							 verticalAlign="bottom"/>
+					<s:Label fontSize="14" text="Total em ligações: "
+							 verticalAlign="bottom"/>
+				</s:VGroup>
+				<s:Button label="Concluir"/>
+			</s:HGroup>					
+		</s:VGroup>
+		
+		
+	</s:NavigatorContent>
+	<s:NavigatorContent width="100%" height="100%" label="TMTI">
+	</s:NavigatorContent>
+	
+</mx:TabNavigator>

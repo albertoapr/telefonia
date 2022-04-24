@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/52/trunk/telefonia-core/src/main/java/mil/br/pamerj/projects/telefonia/core
+END
+SimpleAdminUserService.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/48/trunk/telefonia-core/src/main/java/mil/br/pamerj/projects/telefonia/core/SimpleAdminUserService.java
+END
+SimpleLigacaoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/56/trunk/telefonia-core/src/main/java/mil/br/pamerj/projects/telefonia/core/SimpleLigacaoService.java
+END
+logo.png
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/50/trunk/telefonia-core/src/main/java/mil/br/pamerj/projects/telefonia/core/logo.png
+END
+SimpleFaturaService.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/52/trunk/telefonia-core/src/main/java/mil/br/pamerj/projects/telefonia/core/SimpleFaturaService.java
+END
+SimpleServiceFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/7/trunk/telefonia-core/src/main/java/mil/br/pamerj/projects/telefonia/core/SimpleServiceFactory.java
+END
+ITextRelatorioService.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/52/trunk/telefonia-core/src/main/java/mil/br/pamerj/projects/telefonia/core/ITextRelatorioService.java
+END
+SimpleConfigService.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/7/trunk/telefonia-core/src/main/java/mil/br/pamerj/projects/telefonia/core/SimpleConfigService.java
+END

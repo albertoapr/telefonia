@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:GridItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					xmlns:mx="library://ns.adobe.com/flex/mx" clipAndEnableScrolling="true">
+	
+	<fx:Script>
+		<![CDATA[
+			import br.mil.pamerj.projects.telefonia.events.PessoaServiceEvent;
+			import br.mil.pamerj.projects.telefonia.model.Pessoa;
+			import br.mil.pamerj.projects.telefonia.services.UserService;
+			
+			
+			private var userService:UserService = new UserService();
+			
+			[Bindable]
+			private var pessoa:Pessoa = new Pessoa();
+			
+			override public function prepare(hasBeenRecycled:Boolean):void {
+				//userService.addEventListener(PessoaServiceEvent.PESSOA_LOADED_EVENT, handlePessoaLoaded);
+				if(data != null){
+					lblData.text = data.ramal.login
+					//userService.findByLogin(data.ramal.login);
+				}
+				
+			}
+			private function handlePessoaLoaded(event:PessoaServiceEvent):void{
+				this.pessoa = event.pessoa;				
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Label id="lblData" top="9" left="7" text="{pessoa.nomeGuerra}"/>
+	
+</s:GridItemRenderer>

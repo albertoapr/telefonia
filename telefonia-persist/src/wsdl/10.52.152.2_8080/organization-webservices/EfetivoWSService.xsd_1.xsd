@@ -1,0 +1,462 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2.1-hudson-28-. --><xs:schema xmlns:tns="http://webservices.organization.projects.tomasio.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://webservices.organization.projects.tomasio.com/">
+
+<xs:element name="authenticate" type="tns:authenticate" />
+
+<xs:element name="authenticateResponse" type="tns:authenticateResponse" />
+
+<xs:element name="createPessoa" type="tns:createPessoa" />
+
+<xs:element name="createPessoaResponse" type="tns:createPessoaResponse" />
+
+<xs:element name="findAllInconpletos" type="tns:findAllInconpletos" />
+
+<xs:element name="findAllInconpletosResponse" type="tns:findAllInconpletosResponse" />
+
+<xs:element name="findAllMatriculas" type="tns:findAllMatriculas" />
+
+<xs:element name="findAllMatriculasResponse" type="tns:findAllMatriculasResponse" />
+
+<xs:element name="findAllPessoas" type="tns:findAllPessoas" />
+
+<xs:element name="findAllPessoasResponse" type="tns:findAllPessoasResponse" />
+
+<xs:element name="findAniversariantes" type="tns:findAniversariantes" />
+
+<xs:element name="findAniversariantesDoMes" type="tns:findAniversariantesDoMes" />
+
+<xs:element name="findAniversariantesDoMesResponse" type="tns:findAniversariantesDoMesResponse" />
+
+<xs:element name="findAniversariantesResponse" type="tns:findAniversariantesResponse" />
+
+<xs:element name="findMatricula" type="tns:findMatricula" />
+
+<xs:element name="findMatriculaByCpf" type="tns:findMatriculaByCpf" />
+
+<xs:element name="findMatriculaByCpfResponse" type="tns:findMatriculaByCpfResponse" />
+
+<xs:element name="findMatriculaByLogin" type="tns:findMatriculaByLogin" />
+
+<xs:element name="findMatriculaByLoginResponse" type="tns:findMatriculaByLoginResponse" />
+
+<xs:element name="findMatriculaResponse" type="tns:findMatriculaResponse" />
+
+<xs:element name="findMatriculasAtivas" type="tns:findMatriculasAtivas" />
+
+<xs:element name="findMatriculasAtivasResponse" type="tns:findMatriculasAtivasResponse" />
+
+<xs:element name="findMatriculasInativas" type="tns:findMatriculasInativas" />
+
+<xs:element name="findMatriculasInativasResponse" type="tns:findMatriculasInativasResponse" />
+
+<xs:element name="findMilitares" type="tns:findMilitares" />
+
+<xs:element name="findMilitaresResponse" type="tns:findMilitaresResponse" />
+
+<xs:element name="findPessoa" type="tns:findPessoa" />
+
+<xs:element name="findPessoaByCPF" type="tns:findPessoaByCPF" />
+
+<xs:element name="findPessoaByCPFResponse" type="tns:findPessoaByCPFResponse" />
+
+<xs:element name="findPessoaByIdentidade" type="tns:findPessoaByIdentidade" />
+
+<xs:element name="findPessoaByIdentidadeResponse" type="tns:findPessoaByIdentidadeResponse" />
+
+<xs:element name="findPessoaResponse" type="tns:findPessoaResponse" />
+
+<xs:element name="searchMatriculaByName" type="tns:searchMatriculaByName" />
+
+<xs:element name="searchMatriculaByNameResponse" type="tns:searchMatriculaByNameResponse" />
+
+<xs:element name="searchPessoaByCPF" type="tns:searchPessoaByCPF" />
+
+<xs:element name="searchPessoaByCPFResponse" type="tns:searchPessoaByCPFResponse" />
+
+<xs:element name="searchPessoaByIdentidade" type="tns:searchPessoaByIdentidade" />
+
+<xs:element name="searchPessoaByIdentidadeResponse" type="tns:searchPessoaByIdentidadeResponse" />
+
+<xs:element name="searchPessoaByName" type="tns:searchPessoaByName" />
+
+<xs:element name="searchPessoaByNameResponse" type="tns:searchPessoaByNameResponse" />
+
+<xs:element name="searchPessoaByNameWithFotos" type="tns:searchPessoaByNameWithFotos" />
+
+<xs:element name="searchPessoaByNameWithFotosResponse" type="tns:searchPessoaByNameWithFotosResponse" />
+
+<xs:element name="updatePessoa" type="tns:updatePessoa" />
+
+<xs:element name="updatePessoaResponse" type="tns:updatePessoaResponse" />
+
+<xs:complexType name="createPessoa">
+<xs:sequence>
+<xs:element name="arg0" type="tns:pessoaDTO" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="pessoaDTO">
+<xs:complexContent>
+<xs:extension base="tns:partyDTO">
+<xs:sequence>
+<xs:element name="cpf" type="xs:string" minOccurs="0" />
+<xs:element name="dataNascimento" type="xs:dateTime" minOccurs="0" />
+<xs:element name="fotos" type="tns:fotoDTO" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="identidade" type="tns:identidadeDTO" minOccurs="0" />
+<xs:element name="matriculas" type="tns:matriculaDTO" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="netUser" type="tns:networkUserDTO" minOccurs="0" />
+<xs:element name="nomeGuerra" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="partyDTO">
+<xs:sequence>
+<xs:element name="emails" type="tns:emailDTO" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="enderecos" type="tns:enderecoDTO" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="id" type="xs:long" minOccurs="0" />
+<xs:element name="nome" type="xs:string" minOccurs="0" />
+<xs:element name="telefones" type="tns:telefoneDTO" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="fotoDTO">
+<xs:sequence>
+<xs:element name="avatar" type="xs:boolean" />
+<xs:element name="data" type="xs:dateTime" minOccurs="0" />
+<xs:element name="source" type="xs:base64Binary" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="identidadeDTO">
+<xs:sequence>
+<xs:element name="dataExpedicao" type="xs:dateTime" minOccurs="0" />
+<xs:element name="numero" type="xs:string" minOccurs="0" />
+<xs:element name="orgaoExpedidor" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="matriculaDTO">
+<xs:sequence>
+<xs:element name="antiguidade" type="xs:int" />
+<xs:element name="antiguidadePosto" type="xs:int" />
+<xs:element name="ativo" type="xs:boolean" />
+<xs:element name="cargo" type="xs:string" minOccurs="0" />
+<xs:element name="dataAdmissao" type="xs:dateTime" minOccurs="0" />
+<xs:element name="dataDesligamento" type="xs:dateTime" minOccurs="0" />
+<xs:element name="id" type="xs:long" minOccurs="0" />
+<xs:element name="pessoa" type="tns:pessoaDTO" minOccurs="0" />
+<xs:element name="regime" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="networkUserDTO">
+<xs:sequence>
+<xs:element name="uid" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="emailDTO">
+<xs:sequence>
+<xs:element name="address" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="enderecoDTO">
+<xs:sequence>
+<xs:element name="bairro" type="xs:string" minOccurs="0" />
+<xs:element name="cep" type="xs:string" minOccurs="0" />
+<xs:element name="cidade" type="tns:cidadeDTO" minOccurs="0" />
+<xs:element name="complemento" type="xs:string" minOccurs="0" />
+<xs:element name="logradouro" type="xs:string" minOccurs="0" />
+<xs:element name="numero" type="xs:string" minOccurs="0" />
+<xs:element name="referencia" type="xs:string" minOccurs="0" />
+<xs:element name="tipoEndereco" type="tns:tipoEnderecoDTO" minOccurs="0" />
+<xs:element name="tipoLogradouro" type="tns:tipoLogradouroDTO" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cidadeDTO">
+<xs:sequence>
+<xs:element name="estado" type="tns:estadoDTO" minOccurs="0" />
+<xs:element name="id" type="xs:long" minOccurs="0" />
+<xs:element name="nome" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="estadoDTO">
+<xs:sequence>
+<xs:element name="id" type="xs:long" minOccurs="0" />
+<xs:element name="nome" type="xs:string" minOccurs="0" />
+<xs:element name="sigla" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tipoEnderecoDTO">
+<xs:sequence>
+<xs:element name="descricao" type="xs:string" minOccurs="0" />
+<xs:element name="id" type="xs:long" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tipoLogradouroDTO">
+<xs:sequence>
+<xs:element name="descricao" type="xs:string" minOccurs="0" />
+<xs:element name="id" type="xs:long" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="telefoneDTO">
+<xs:sequence>
+<xs:element name="ddd" type="xs:string" minOccurs="0" />
+<xs:element name="label" type="xs:string" minOccurs="0" />
+<xs:element name="numero" type="xs:string" minOccurs="0" />
+<xs:element name="privativo" type="xs:boolean" />
+<xs:element name="ramal" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createPessoaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:long" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findMilitares">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="findMilitaresResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:matriculaDTO" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findMatriculaByLogin">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findMatriculaByLoginResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:matriculaDTO" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findMatriculasInativas">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="findMatriculasInativasResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:matriculaDTO" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findAniversariantes">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="findAniversariantesResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:matriculaDTO" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findMatriculaByCpf">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findMatriculaByCpfResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:matriculaDTO" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findAllMatriculas">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="findAllMatriculasResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:matriculaDTO" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findAllPessoas">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="findAllPessoasResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:pessoaDTO" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findMatricula">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findMatriculaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:matriculaDTO" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findPessoa">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findPessoaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:pessoaDTO" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findPessoaByIdentidade">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+<xs:element name="arg1" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findPessoaByIdentidadeResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:pessoaDTO" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findAllInconpletos">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="findAllInconpletosResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:matriculaDTO" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="authenticate">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+<xs:element name="arg1" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="authenticateResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findMatriculasAtivas">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="findMatriculasAtivasResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:matriculaDTO" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findPessoaByCPF">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findPessoaByCPFResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:pessoaDTO" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchPessoaByCPF">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchPessoaByCPFResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:pessoaDTO" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchPessoaByName">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchPessoaByNameResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:pessoaDTO" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchMatriculaByName">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchMatriculaByNameResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:matriculaDTO" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findAniversariantesDoMes">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="findAniversariantesDoMesResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:matriculaDTO" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchPessoaByIdentidade">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchPessoaByIdentidadeResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:pessoaDTO" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchPessoaByNameWithFotos">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchPessoaByNameWithFotosResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:pessoaDTO" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updatePessoa">
+<xs:sequence>
+<xs:element name="arg0" type="tns:pessoaDTO" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updatePessoaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:long" />
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

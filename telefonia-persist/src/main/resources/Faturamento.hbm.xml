@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="mil.br.pamerj.projects.telefonia.model">
+  <class name="Faturamento" table="FATURAMENTO">
+    <id column="id" name="id">
+      <generator class="native"/>
+    </id>
+    <property column="aberto" name="aberto"/>
+    <property column="data_fechamento" name="dataFechamento"/>
+    <property column="periodo" name="periodo"/>
+    <set inverse="true" lazy="false" name="faturas">
+      <key column="faturamento_id"/>
+      <one-to-many class="Fatura"/>
+    </set>
+  </class>
+</hibernate-mapping>
